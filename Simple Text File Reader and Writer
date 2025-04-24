@@ -1,0 +1,34 @@
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+    string filename = "example.txt";
+    string text;
+
+    ofstream outFile(filename);
+    if (outFile.is_open()) {
+        cout << "Enter text to write to file (end with 'exit'):\n";
+        while (true) {
+            getline(cin, text);
+            if (text == "exit") break;
+            outFile << text << endl;
+        }
+        outFile.close();
+    } else {
+        cout << "Unable to open file for writing.";
+    }
+
+    ifstream inFile(filename);
+    if (inFile.is_open()) {
+        cout << "\nReading from file:\n";
+        while (getline(inFile, text)) {
+            cout << text << endl;
+        }
+        inFile.close();
+    } else {
+        cout << "Unable to open file for reading.";
+    }
+
+    return 0;
+}
